@@ -8,15 +8,21 @@
 必须和我THUCNews中的数据格式一致。分别替换成为你的数据即可。
 ## 2.运行操作：
 ### 训练并测试：
-（1）bert
+（1）基础的bert
+
+
 python run.py --model bert | tee embedding.txt
 
 
-（2）bert + 其它
+（2）bert + 其它（eg bert_CNN）
+
+
 python run.py --model bert_CNN | tee embedding.txt
 
 
 （3）ERNIE
+
+
 python run.py --model ERNIE | tee embedding.txt
 
 ## 3.文件说明：
