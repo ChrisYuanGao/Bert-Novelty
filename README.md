@@ -26,4 +26,4 @@ python run.py --model bert_CNN | tee embedding.txt
 python run.py --model ERNIE | tee embedding.txt
 
 ## 3.文件说明：
-运行完成后embedding.txt即为文本的embedding层，THUCNews文件夹下的prediction_result.txt即为预测结果。
+运行完成后embedding.txt即为文本的embedding层，THUCNews文件夹下的prediction_result.txt即为预测结果。(如果长度与对应的文本不匹配，可能是读取数据时出问题，删除该文件中的第一行即可）
