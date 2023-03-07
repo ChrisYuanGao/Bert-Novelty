@@ -7,7 +7,7 @@
 ## 1.数据与模型导入：
 ### 数据
 
-必须和我THUCNews中的数据格式一致。分别替换成为你的数据即可。
+必须和我THUCNews/data中的数据格式一致。分别替换成为你的数据即可。
 ### 模型
 
 链接：https://pan.baidu.com/s/1jHF-zDibrDQZz5BZDRWpSA?pwd=5a8m 
