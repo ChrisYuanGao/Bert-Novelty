@@ -8,7 +8,9 @@ from sklearn import metrics
 import time
 from utils import get_time_dif
 from pytorch_pretrained.optimization import BertAdam
-
+import os
+from tqdm import trange, tqdm
+import shutil
 
 # 权重初始化，默认xavier
 def init_network(model, method='xavier', exclude='embedding', seed=123):
@@ -27,6 +29,42 @@ def init_network(model, method='xavier', exclude='embedding', seed=123):
                 nn.init.constant_(w, 0)
             else:
                 pass
+
+def save_npy(config, model, train_iter, dev_iter, test_iter, predict_iter):
+    shutil.rmtree('sentence_npy', ignore_errors=True)
+    for i in ['train', 'test', 'dev', 'pred']:
+        os.makedirs(f'sentence_npy/{i}')
+    model.eval()
+    for i, (trains, labels) in enumerate(tqdm(train_iter)):
+        outputs = model(trains).detach().cpu().numpy()
+        d0 = {}
+        for sen in range(len(trains)):
+            d0[trains[sen][-1]] = outputs[sen]
+        np.save(f'sentence_npy/train/{str(i+1).zfill(5)}.npy', outputs)
+    
+    for i, (trains, labels) in enumerate(tqdm(test_iter)):
+        outputs = model(trains).detach().cpu().numpy()
+        d0 = {}
+        for sen in range(len(trains)):
+            d0[trains[sen][-1]] = outputs[sen]
+        np.save(f'sentence_npy/test/{str(i+1).zfill(5)}.npy', outputs)
+    
+    for i, (trains, labels) in enumerate(tqdm(dev_iter)):
+        outputs = model(trains).detach().cpu().numpy()
+        d0 = {}
+        for sen in range(len(trains)):
+            d0[trains[sen][-1]] = outputs[sen]
+        np.save(f'sentence_npy/dev/{str(i+1).zfill(5)}.npy', outputs)
+
+    for i, (trains, labels) in enumerate(tqdm(predict_iter)):
+        outputs = model(trains).detach().cpu().numpy()
+        d0 = {}
+        for sen in range(len(trains)):
+            d0[trains[sen][-1]] = outputs[sen]
+        np.save(f'sentence_npy/pred/{str(i+1).zfill(5)}.npy', outputs)
+    
+    
+        
 
 
 def train(config, model, train_iter, dev_iter, test_iter):
@@ -47,7 +85,7 @@ def train(config, model, train_iter, dev_iter, test_iter):
     last_improve = 0  # 记录上次验证集loss下降的batch数
     flag = False  # 记录是否很久没有效果提升
     model.train()
-    for epoch in range(config.num_epochs):
+    for epoch in trange(config.num_epochs):
         print('Epoch [{}/{}]'.format(epoch + 1, config.num_epochs))
         for i, (trains, labels) in enumerate(train_iter):
             outputs = model(trains)

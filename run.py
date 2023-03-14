@@ -2,7 +2,7 @@
 import time
 import torch
 import numpy as np
-from train_eval import train, init_network, predict
+from train_eval import save_npy, init_network, predict
 from importlib import import_module
 import argparse
 from utils import build_dataset, build_iterator, get_time_dif
@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
     # train
     model = x.Model(config).to(config.device)
-    train(config, model, train_iter, dev_iter, test_iter)
+    save_npy(config, model, train_iter, dev_iter, test_iter, predict_iter)
 
     # predict
-    predict(config,model,predict_iter)
+    # predict(config,model,predict_iter)

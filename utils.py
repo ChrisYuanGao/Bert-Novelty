@@ -31,7 +31,7 @@ def build_dataset(config):
                         mask = [1] * pad_size
                         token_ids = token_ids[:pad_size]
                         seq_len = pad_size
-                contents.append((token_ids, int(label), seq_len, mask))
+                contents.append((token_ids, int(label), seq_len, mask, content))
         return contents
     train = load_dataset(config.train_path, config.pad_size)
     dev = load_dataset(config.dev_path, config.pad_size)
@@ -58,7 +58,8 @@ class DatasetIterater(object):
         # pad前的长度(超过pad_size的设为pad_size)
         seq_len = torch.LongTensor([_[2] for _ in datas]).to(self.device)
         mask = torch.LongTensor([_[3] for _ in datas]).to(self.device)
-        return (x, seq_len, mask), y
+        content = [_[4] for _ in datas]
+        return (x, seq_len, mask, content), y
 
     def __next__(self):
         if self.residue and self.index == self.n_batches:
