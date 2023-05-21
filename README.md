@@ -20,6 +20,7 @@ Must be in the same form of my data.
 python run.py --model bert
 
 
+结果存放在sentence_npy中，以npy格式存储，读取方法详见check.ipynb文档。
 ## 3.后续分析文件说明：
 
 
