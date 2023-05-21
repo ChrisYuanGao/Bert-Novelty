@@ -31,6 +31,16 @@ python run.py --model bert_CNN
 
 python run.py --model ERNIE
 
-## 3.文件说明：
+## 3.后续分析文件说明：
 
-waiting
+
+3.1 check.ipynb
+
+
+读取embedding结果，并且进行cosine similarity计算等任务
+
+
+3.2 embedding_from_package.ipynb
+
+
+通过package导入embedding结果，可以作为本项目的备选。该项目更加完善
