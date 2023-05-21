@@ -16,20 +16,9 @@ Must be in the same form of my data.
 
 ## 2.运行操作：
 ### 训练并测试：
-（1）基础的bert
 
 python run.py --model bert
 
-
-（2）bert + 其它（eg bert_CNN）
-
-python run.py --model bert_CNN
-
-
-（3）ERNIE
-
-
-python run.py --model ERNIE
 
 ## 3.后续分析文件说明：
 
